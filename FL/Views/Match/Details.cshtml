@@ -1,0 +1,50 @@
+﻿@model Domain.Entities.Match
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Match</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeGoals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeGoals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayGoals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayGoals)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeClubId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeClubId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayClubId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayClubId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MatchId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
