@@ -1,87 +1,13 @@
 ﻿@using GridMvc.Html
+@using GridMvc.Sorting
 @model IEnumerable<Domain.Entities.Club>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 id="h2centrowane">Tabela</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Played)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Points)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Won)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Drawn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalsFor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalsAgainst)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Played)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Points)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Won)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Drawn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GoalsFor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GoalsAgainst)
-        </td>
-        <td>@{
-                if (User.IsInRole("Admin"))
-                {
-                    Html.ActionLink("Edit", "Edit", new {id = item.ClubId});
-                    Html.ActionLink("Details", "Details", new {id = item.ClubId});
-                    Html.ActionLink("Delete", "Delete", new {id = item.ClubId});
-                }
-                else
-                {
-                    Html.ActionLink("Details", "Details", new {id = item.ClubId});
-                }
-            }
-        </td>
-    </tr>
-}
-
-</table>*@
 <div class="container">
     @{
     try
@@ -89,15 +15,15 @@
         @Html.Grid(Model).Columns(columns =>
         {
 
-            columns.Add(club => club.Name).Titled("Nazwa").Filterable(true).Encoded(false).Sanitized(false)
-                .RenderValueAs(club => Html.ActionLink(club.Name, "Details", "Club", new { Id = club.ClubId }, new { style = "text-decoration:none" }));
-            columns.Add(club => club.Points).Titled("Pkt");
-            columns.Add(club => club.Played).Titled("M");
-            columns.Add(club => club.Won).Titled("Z");
-            columns.Add(club => club.Drawn).Titled("R");
-            columns.Add(club => club.Lost).Titled("P");
-            columns.Add(club => club.GoalsFor).Titled("B+");
-            columns.Add(club => club.GoalsAgainst).Titled("B-");
+            columns.Add(club => club.Name).Titled("").Filterable(true).Encoded(false).Sanitized(false)
+                .RenderValueAs(club => Html.ActionLink(club.Name, "Details", "Club", new { Id = club.ClubId }, new { style = "text-decoration:none" })).SetWidth(200);
+            columns.Add(club => club.Points).Titled("Pkt").SetWidth(50).SortInitialDirection(GridSortDirection.Ascending);
+            columns.Add(club => club.Played).Titled("M").SetWidth(50);
+            columns.Add(club => club.Won).Titled("Z").SetWidth(50);
+            columns.Add(club => club.Drawn).Titled("R").SetWidth(50);
+            columns.Add(club => club.Lost).Titled("P").SetWidth(50);
+            columns.Add().RenderValueAs(club=>club.GoalsFor+"-"+club.GoalsAgainst).Titled("+/-");
+            
 
         }).Sortable(true)
     }

@@ -1,17 +1,32 @@
 ﻿@model Domain.Entities.Match
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły meczu @Model.HomeClub.Name - @Model.AwayClub.Name</h2>
 
-<div>
-    <h4>Match</h4>
-	<hr />
+<div class="col-lg-2">
+
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.HomeGoals)
+            @Html.Label("Gospodarze:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeClub.Name)
+        </dd>
+
+        <dt>
+            @Html.Label("Goście:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwayClub.Name)
+        </dd>
+        <dt>
+            @Html.Label("Bramki gospodarzy: ")
         </dt>
 
         <dd>
@@ -19,32 +34,21 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AwayGoals)
+            @Html.Label("Bramki gości:")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AwayGoals)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeClubId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HomeClubId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AwayClubId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AwayClubId)
-        </dd>
 
     </dl>
 </div>
+<div class="col-lg-2">
+    <h4>Zdarzenia: </h4>
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MatchId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.MatchId }) |*@
+    @Html.ActionLink("Powrót", "Index", "Match", null, new{@class="btn btn-success"})
 </p>

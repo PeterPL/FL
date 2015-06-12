@@ -17,7 +17,23 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeGoals, new { @class = "control-label col-md-2" })
+            @Html.Label("Gospodarze: ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("HomeClubId", String.Empty)
+                @Html.ValidationMessageFor(model => model.HomeClubId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Goście: ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AwayClubId", String.Empty)
+                @Html.ValidationMessageFor(model => model.AwayClubId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Bramki gospodarzy: ", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HomeGoals)
                 @Html.ValidationMessageFor(model => model.HomeGoals)
@@ -25,28 +41,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AwayGoals, new { @class = "control-label col-md-2" })
+            @Html.Label("Bramki gości: ", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AwayGoals)
                 @Html.ValidationMessageFor(model => model.AwayGoals)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HomeClubId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HomeClubId)
-                @Html.ValidationMessageFor(model => model.HomeClubId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AwayClubId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AwayClubId)
-                @Html.ValidationMessageFor(model => model.AwayClubId)
-            </div>
-        </div>
+       
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

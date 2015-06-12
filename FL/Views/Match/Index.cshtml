@@ -1,51 +1,54 @@
-﻿@model IEnumerable<Domain.Entities.Match>
+﻿@using GridMvc.Html
+@model IEnumerable<Domain.Entities.Match>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mecze";
 }
 
-<h2>Index</h2>
+<h2>Mecze</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Create", "Match")" class="btn btn-success">
+       Dodaj
+        
+    </a>
 </p>
-<table class="table">
+<table class="table table-striped table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HomeGoals)
+            Gospodarze
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AwayGoals)
+            Goście
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HomeClubId)
+            Wynik
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AwayClubId)
-        </th>
-        <th></th>
+
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomeGoals)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwayGoals)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HomeClubId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwayClubId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MatchId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MatchId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MatchId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeClub.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayClub.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeGoals) : @Html.DisplayFor(modelItem => item.AwayGoals)
+            </td>
+
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new {id = item.MatchId}) |*@
+                @Html.ActionLink("Szczegóły", "Details", "Match", new{id = item.MatchId}, new {@class="btn btn-info"})
+                    
+</td>
+        </tr>
+    }
 
 </table>
+
+

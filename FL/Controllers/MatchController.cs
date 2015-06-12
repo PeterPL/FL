@@ -17,7 +17,9 @@ namespace FL.Controllers
 
         // GET: /Match/
         public ActionResult Index()
+
         {
+            //ViewBag.Clubs = db.Clubs.ToList();
             return View(db.Matches.ToList());
         }
 
@@ -39,6 +41,8 @@ namespace FL.Controllers
         // GET: /Match/Create
         public ActionResult Create()
         {
+            ViewBag.HomeClubId = new SelectList(db.Clubs, "ClubId", "Name");
+            ViewBag.AwayClubId = new SelectList(db.Clubs, "ClubId", "Name");
             return View();
         }
 
@@ -51,11 +55,49 @@ namespace FL.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                Club home = db.Clubs.Find(match.HomeClubId);
+                Club away = db.Clubs.Find(match.AwayClubId);
+
+                home.GoalsFor += match.HomeGoals;
+                home.GoalsAgainst += match.AwayGoals;
+                away.GoalsFor += match.AwayGoals;
+                away.GoalsAgainst += match.HomeGoals;
+                home.Played++;
+                away.Played++;
+                //home.Matches.Add(match);
+                //away.Matches.Add(match);
+
+                if (match.HomeGoals > match.AwayGoals)
+                {
+                    home.Won++;
+                    away.Lost++;
+                    home.Points += 3;
+                }
+                if (match.HomeGoals < match.AwayGoals)
+                {
+                    away.Won++;
+                    home.Lost++;
+                    away.Points += 3;
+                }
+                if(match.HomeGoals == match.AwayGoals)
+                {
+                    home.Drawn++;
+                    away.Drawn++;
+                    home.Points++;
+                    away.Points++;
+                }
+
+                match.HomeClub = db.Clubs.Find(match.HomeClubId);
+                match.AwayClub = db.Clubs.Find(match.AwayClubId);
+
+                db.Entry(home).State = EntityState.Modified;
                 db.Matches.Add(match);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.HomeClubId = new SelectList(db.Clubs, "ClubId", "Name", match.HomeClubId);
+            ViewBag.AwayClubId = new SelectList(db.Clubs, "ClubId", "Name",match.AwayClubId);
             return View(match);
         }
 
@@ -67,6 +109,8 @@ namespace FL.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Match match = db.Matches.Find(id);
+            ViewBag.HomeClubId = new SelectList(db.Clubs, "ClubId", "Name");
+            ViewBag.AwayClubId = new SelectList(db.Clubs, "ClubId", "Name");
             if (match == null)
             {
                 return HttpNotFound();
@@ -124,5 +168,7 @@ namespace FL.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }
