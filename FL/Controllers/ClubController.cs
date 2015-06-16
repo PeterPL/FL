@@ -123,6 +123,10 @@ namespace FL.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Club club = db.Clubs.Find(id);
+            List<Match> matches = db.Matches.Where(m => m.HomeClubId == club.ClubId || m.AwayClub.ClubId == club.ClubId).ToList();
+            List<Player> players = db.Players.Where(p => p.ClubId == club.ClubId).ToList();
+            db.Matches.RemoveRange(matches);
+            db.Players.RemoveRange(players);
            // db.Matches.RemoveRange(db.Matches.Where(m => m.HomeClub == club || m.AwayClub == club));
             db.Clubs.Remove(club);
           
