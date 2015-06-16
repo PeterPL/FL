@@ -4,14 +4,22 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły - @Model.Name</h2>
 
 <div>
-    <h4>Player</h4>
+    
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Club.Name)
+            @Html.Label("Piłkarz: ")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.Label("Klub: ")
         </dt>
 
         <dd>
@@ -19,32 +27,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Position.Name)
+            @Html.Label("Pozycja:")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Position.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId }) |
-    @Html.ActionLink("Back to List", "Index")
+   <!-- @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId }) |-->
+    @Html.ActionLink("Lista piłkarzy", "Index",null, new{@class="btn btn-success"})
 </p>

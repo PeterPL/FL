@@ -26,6 +26,8 @@ namespace Domain.EF
            //Configure domain classes using Fluent API here
 
            modelBuilder.Entity<Player>().HasRequired(p => p.Club).WithMany().WillCascadeOnDelete(false);
+           //modelBuilder.Entity<Club>().HasMany(m => m.Matches).WithOptional(c => c.HomeClub).WillCascadeOnDelete(true);
+          // modelBuilder.Entity<Club>().HasMany(m => m.Matches).WithOptional(c => c.AwayClub).WillCascadeOnDelete(true);
        }
     }
 }

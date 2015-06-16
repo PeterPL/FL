@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title >@ViewBag.Title - My ASP.NET Application</title>
+    <title >@ViewBag.Title - Football League</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   
 
 </head>
 <body>
@@ -21,13 +22,45 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Tabela", "Index", "Club")</li>
-                    <li>@Html.ActionLink("Kluby", "Index", "Club")</li>
-                    <li>@Html.ActionLink("Piłkarze", "Index", "Player")</li>
-                    <li>@Html.ActionLink("Mecze", "Index", "Match")</li>
+                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Tabela", "ShowTable", "Club")</li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kluby <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista", "Index", "Club")</li>
+                            @{if (User.Identity.IsAuthenticated)
+                              {<li>@Html.ActionLink("Nowy klub", "Create", "Club")</li> }
+                                
+                                
+                        }
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Piłkarze <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista", "Index", "Player")</li>
+                            @{
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Nowy piłkarz", "Create", "Player")</li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mecze <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Lista", "Index", "Match")</li>
+                            @{
+                                if (User.Identity.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Nowy mecz", "Create", "Match")</li>
+                                }
+                            }
+                                </ul>
+                    </li>
                     
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -37,13 +70,16 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/myscripts")
     @RenderSection("scripts", required: false)
+
+
+
+   
 </body>
 </html>

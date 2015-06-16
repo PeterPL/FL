@@ -5,15 +5,18 @@
     ViewBag.Title = "Mecze";
 }
 
+
 <h2>Mecze</h2>
 
-<p>
-    <a href="@Url.Action("Create", "Match")" class="btn btn-success">
-       Dodaj
-        
-    </a>
-</p>
-<table class="table table-striped table-bordered">
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Dodaj", "Create", "Match", null, new {@class = "btn btn-success"})
+        </p>
+    }
+}
+    <table class="table table-striped table-bordered">
     <tr>
         <th>
             Gospodarze
@@ -32,10 +35,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.HomeClub.Name)
+                @Html.ActionLink(item.HomeClub.Name, "Details", "Club", new { Id = item.HomeClubId }, new { style = "text-decoration:none" })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AwayClub.Name)
+                @Html.ActionLink(item.AwayClub.Name, "Details", "Club", new {Id=item.AwayClubId},new { style = "text-decoration:none"})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeGoals) : @Html.DisplayFor(modelItem => item.AwayGoals)

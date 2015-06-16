@@ -173,6 +173,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506141325507_playersName.cs" />
+    <Compile Include="Migrations\201506141325507_playersName.Designer.cs">
+      <DependentUpon>201506141325507_playersName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506141347377_number.cs" />
+    <Compile Include="Migrations\201506141347377_number.Designer.cs">
+      <DependentUpon>201506141347377_number.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506141355220_playerName.cs" />
+    <Compile Include="Migrations\201506141355220_playerName.Designer.cs">
+      <DependentUpon>201506141355220_playerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506151327043_matchReq.cs" />
+    <Compile Include="Migrations\201506151327043_matchReq.Designer.cs">
+      <DependentUpon>201506151327043_matchReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +199,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\Images\BG.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -200,7 +218,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modalform.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\myScripts.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -217,8 +237,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
@@ -258,6 +276,10 @@
     <Content Include="Views\EventKind\Index.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Club\ShowTable.cshtml" />
+    <Content Include="Views\Shared\_IndexById.cshtml" />
+    <Content Include="Views\Player\IndexById.cshtml" />
+    <Content Include="Views\Player\CreateByClub.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,6 +296,20 @@
       <Project>{aceb26be-a558-4942-82a6-8754c2c93985}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506141325507_playersName.resx">
+      <DependentUpon>201506141325507_playersName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506141347377_number.resx">
+      <DependentUpon>201506141347377_number.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506141355220_playerName.resx">
+      <DependentUpon>201506141355220_playerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506151327043_matchReq.resx">
+      <DependentUpon>201506151327043_matchReq.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

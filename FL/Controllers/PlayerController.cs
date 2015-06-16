@@ -22,6 +22,7 @@ namespace FL.Controllers
             return View(players.ToList());
         }
 
+
         // GET: /Player/Details/5
         public ActionResult Details(int? id)
         {
@@ -43,6 +44,14 @@ namespace FL.Controllers
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name");
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Name");
             return View();
+        
+        }
+
+        public ActionResult CreateByClub(int clubId)
+        {
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Name");
+            ViewBag.ClubId = clubId;
+            return View();
         }
 
         // POST: /Player/Create
@@ -50,15 +59,39 @@ namespace FL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PlayerId,FirstName,LastName,PositionId,ClubId")] Player player)
+        public ActionResult Create([Bind(Include="PlayerId,Name,PositionId,ClubId")] Player player)
         {
             if (ModelState.IsValid)
             {
                 player.Club = db.Clubs.FirstOrDefault(c => c.ClubId == player.ClubId);
                 player.Position = db.Positions.FirstOrDefault(p => p.PositionId == player.PositionId);
                 db.Players.Add(player);
+                Club club = player.Club;
+                club.Players.Add(player);
+                db.Entry(club).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name", player.ClubId);
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Name", player.PositionId);
+            return View(player);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateByClub([Bind(Include = "PlayerId,Name,PositionId,ClubId")] Player player)
+        {
+            if (ModelState.IsValid)
+            {
+                player.Club = db.Clubs.FirstOrDefault(c => c.ClubId == player.ClubId);
+                player.Position = db.Positions.FirstOrDefault(p => p.PositionId == player.PositionId);
+                db.Players.Add(player);
+                Club club = player.Club;
+                club.Players.Add(player);
+                db.Entry(club).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "Club", new{Id=club.ClubId});
             }
 
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name", player.ClubId);
@@ -88,10 +121,11 @@ namespace FL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="PlayerId,FirstName,LastName,PositionId,ClubId")] Player player)
+        public ActionResult Edit([Bind(Include="PlayerId,Name,PositionId,ClubId")] Player player)
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

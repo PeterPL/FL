@@ -21,6 +21,13 @@ namespace FL.Controllers
             return View(db.Clubs.ToList());
         }
 
+        public ActionResult ShowTable()
+        {
+            return View(db.Clubs.ToList());
+        }
+
+       
+
         // GET: /Club/Details/5
         public ActionResult Details(int? id)
         {
@@ -33,6 +40,9 @@ namespace FL.Controllers
             {
                 return HttpNotFound();
             }
+            List<Match> matches = new List<Match>();
+            matches = db.Matches.Where(m => m.HomeClubId == id || m.AwayClubId == id).ToList();
+            ViewBag.ClubMatches = matches;
             return View(club);
         }
 
@@ -113,7 +123,9 @@ namespace FL.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Club club = db.Clubs.Find(id);
+           // db.Matches.RemoveRange(db.Matches.Where(m => m.HomeClub == club || m.AwayClub == club));
             db.Clubs.Remove(club);
+          
             db.SaveChanges();
             return RedirectToAction("Index");
         }

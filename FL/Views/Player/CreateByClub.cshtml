@@ -1,18 +1,18 @@
 ﻿@model Domain.Entities.Player
 
 @{
-    ViewBag.Title = "Nowy piłkarz";
+    ViewBag.Title = "Nowy piłkarz dla klubu";
 }
 
 <h2>Nowy piłkarz</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        
+
         <hr />
         @Html.ValidationSummary(true)
 
@@ -34,25 +34,22 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Klub", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ClubId", String.Empty)
-                @Html.ValidationMessageFor(model => model.ClubId)
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj" class="btn btn-success" />
+                <input type="hidden" name="clubId" value="@ViewBag.ClubId"/>
+                <input type="submit" value="Dodaj" class="btn btn-success"/>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Powrót", "Index", null, new{@class="btn btn-success"})
+    @Html.ActionLink("Powrót", "Details", "Club", new{Id=ViewBag.ClubId}, new { @class = "btn btn-success" })
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+

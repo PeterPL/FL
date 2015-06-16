@@ -1,10 +1,10 @@
 ﻿@model Domain.Entities.Club
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nowy klub";
 }
 
-<h2>Create</h2>
+<h2>Nowy klub</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,84 +12,30 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Club</h4>
+
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.Label("Nazwa:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Played, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Played)
-                @Html.ValidationMessageFor(model => model.Played)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Points, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Points)
-                @Html.ValidationMessageFor(model => model.Points)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Won, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Won)
-                @Html.ValidationMessageFor(model => model.Won)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Drawn, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Drawn)
-                @Html.ValidationMessageFor(model => model.Drawn)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Lost, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Lost)
-                @Html.ValidationMessageFor(model => model.Lost)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GoalsFor, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GoalsFor)
-                @Html.ValidationMessageFor(model => model.GoalsFor)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GoalsAgainst, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GoalsAgainst)
-                @Html.ValidationMessageFor(model => model.GoalsAgainst)
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Dodaj" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót", "Index", null, new{@class=" btn btn-success"})
 </div>
 
 @section Scripts {

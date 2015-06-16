@@ -65,6 +65,7 @@ namespace FL.Controllers
                 away.GoalsAgainst += match.HomeGoals;
                 home.Played++;
                 away.Played++;
+ 
                 //home.Matches.Add(match);
                 //away.Matches.Add(match);
 
@@ -88,10 +89,11 @@ namespace FL.Controllers
                     away.Points++;
                 }
 
-                match.HomeClub = db.Clubs.Find(match.HomeClubId);
-                match.AwayClub = db.Clubs.Find(match.AwayClubId);
+                match.HomeClub = home;
+                match.AwayClub = away;
 
                 db.Entry(home).State = EntityState.Modified;
+                db.Entry(away).State = EntityState.Modified;
                 db.Matches.Add(match);
                 db.SaveChanges();
                 return RedirectToAction("Index");

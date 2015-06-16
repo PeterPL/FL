@@ -26,6 +26,8 @@ namespace FL
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/myscripts").Include("~/Scripts/myScripts.js"));
         }
     }
 }

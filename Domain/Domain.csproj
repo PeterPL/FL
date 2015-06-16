@@ -53,6 +53,27 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Position.cs" />
+    <Compile Include="Migrations\201505271253147_InitialCreate.cs" />
+    <Compile Include="Migrations\201505271253147_InitialCreate.Designer.cs">
+      <DependentUpon>201505271253147_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506141356135_playerName.cs" />
+    <Compile Include="Migrations\201506141356135_playerName.Designer.cs">
+      <DependentUpon>201506141356135_playerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506151327223_matchReq.cs" />
+    <Compile Include="Migrations\201506151327223_matchReq.Designer.cs">
+      <DependentUpon>201506151327223_matchReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506151332252_allReq.cs" />
+    <Compile Include="Migrations\201506151332252_allReq.Designer.cs">
+      <DependentUpon>201506151332252_allReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506160940237_onDelete.cs" />
+    <Compile Include="Migrations\201506160940237_onDelete.Designer.cs">
+      <DependentUpon>201506160940237_onDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +85,23 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505271253147_InitialCreate.resx">
+      <DependentUpon>201505271253147_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506141356135_playerName.resx">
+      <DependentUpon>201506141356135_playerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506151327223_matchReq.resx">
+      <DependentUpon>201506151327223_matchReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506151332252_allReq.resx">
+      <DependentUpon>201506151332252_allReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506160940237_onDelete.resx">
+      <DependentUpon>201506160940237_onDelete.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

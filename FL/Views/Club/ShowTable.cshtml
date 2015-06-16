@@ -1,0 +1,36 @@
+﻿
+@using GridMvc.Html
+@using GridMvc.Sorting
+@model IEnumerable<Domain.Entities.Club>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 id="hcentrowane">Tabela</h2>
+
+<div class="col-lg-12">
+    @{
+        try
+        {
+            @Html.Grid(Model).Columns(columns =>
+        {
+
+            columns.Add(club => club.Name).Titled("").Filterable(true).Encoded(false).Sanitized(false)
+                .RenderValueAs(club => Html.ActionLink(club.Name, "Details", "Club", new { Id = club.ClubId }, new { style = "text-decoration:none" })).SetWidth(200);
+            columns.Add(club => club.Points).Titled("Pkt").SetWidth(50).SortInitialDirection(GridSortDirection.Ascending);
+            columns.Add(club => club.Played).Titled("M").SetWidth(50);
+            columns.Add(club => club.Won).Titled("Z").SetWidth(50);
+            columns.Add(club => club.Drawn).Titled("R").SetWidth(50);
+            columns.Add(club => club.Lost).Titled("P").SetWidth(50);
+            columns.Add().RenderValueAs(club => club.GoalsFor + "-" + club.GoalsAgainst).Titled("+/-");
+
+
+        }).Sortable(true)
+        }
+        catch
+        {
+        }
+    }
+
+</div>

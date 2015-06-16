@@ -38,12 +38,31 @@ namespace FL.Controllers
         }
 
         // GET: /Event/Create
-        public ActionResult Create()
+        //public ActionResult Create()
+        //{
+        //    ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name");
+        //    ViewBag.EventKindId = new SelectList(db.EventKinds, "EventKindId", "Name");
+        //    ViewBag.MatchId = new SelectList(db.Matches, "MatchId", "MatchId");
+        //    ViewBag.PlayerId = new SelectList(db.Players, "PlayerId", "FirstName");
+        //    return View();
+        //}
+
+        public ActionResult Create(int matchId)
         {
-            ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name");
+            Match match = (db.Matches.Where(m => m.MatchId == matchId)).FirstOrDefault();
+            List<Club> clubsFromMatch = new List<Club>();
+            List<Player> playersFromMatch = new List<Player>();
+
+            clubsFromMatch.Add(match.HomeClub);
+            clubsFromMatch.Add(match.AwayClub);
+            foreach (Player p in match.HomeClub.Players) playersFromMatch.Add(p);
+            foreach(Player p in match.AwayClub.Players) playersFromMatch.Add(p);
+                
+            ViewBag.ClubId = new SelectList(clubsFromMatch, "ClubId", "Name");
             ViewBag.EventKindId = new SelectList(db.EventKinds, "EventKindId", "Name");
-            ViewBag.MatchId = new SelectList(db.Matches, "MatchId", "MatchId");
-            ViewBag.PlayerId = new SelectList(db.Players, "PlayerId", "FirstName");
+            ViewBag.MatchId = matchId;
+            ViewBag.PlayerId = new SelectList(playersFromMatch, "PlayerId", "Name");
+
             return View();
         }
 
@@ -52,13 +71,13 @@ namespace FL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="EventId,Time,MatchId,ClubId,PlayerId,EventKindId")] Event @event)
+        public ActionResult Create([Bind(Include="EventId,Time,matchId,ClubId,PlayerId,EventKindId")] Event @event)
         {
             if (ModelState.IsValid)
             {
                 db.Events.Add(@event);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Match", new{Id=@event.MatchId});
             }
 
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name", @event.ClubId);
@@ -130,7 +149,7 @@ namespace FL.Controllers
             Event @event = db.Events.Find(id);
             db.Events.Remove(@event);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Match", new{matchId = @event.MatchId});
         }
 
         protected override void Dispose(bool disposing)

@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Nowe zdarzenie</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,28 +12,25 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Event</h4>
+        
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
+            @Html.Label("Minuta: ", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Time)
                 @Html.ValidationMessageFor(model => model.Time)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MatchId, "MatchId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MatchId", String.Empty)
-                @Html.ValidationMessageFor(model => model.MatchId)
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.ValidationMessageFor(model => ViewBag.matchId)
+
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ClubId, "ClubId", new { @class = "control-label col-md-2" })
+            @Html.Label("Klub:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ClubId", String.Empty)
                 @Html.ValidationMessageFor(model => model.ClubId)
@@ -41,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PlayerId, "PlayerId", new { @class = "control-label col-md-2" })
+            @Html.Label("Zawodnik:" ,new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PlayerId", String.Empty)
                 @Html.ValidationMessageFor(model => model.PlayerId)
@@ -49,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventKindId, "EventKindId", new { @class = "control-label col-md-2" })
+            @Html.Label("Typ zdarzenia: ", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("EventKindId", String.Empty)
                 @Html.ValidationMessageFor(model => model.EventKindId)
@@ -58,14 +55,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="hidden" name="matchId" value="@ViewBag.MatchId"/>
+                <input type="submit" value="Dodaj" class="btn btn-default"/>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Szczegóły meczu", "Details", "Match", new{Id = @ViewBag.MatchId}, new{@class= "btn btn-success"})
 </div>
 
 @section Scripts {
