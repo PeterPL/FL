@@ -16,42 +16,52 @@
         </p>
     }
 }
-    <table class="table table-striped table-bordered">
-    <tr>
-        <th>
-            Gospodarze
-        </th>
-        <th>
-            Goście
-        </th>
-        <th>
-            Wynik
-        </th>
-
-
-    </tr>
-
-    @foreach (var item in Model)
+@{
+    if (Model.Count() != 0)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.HomeClub.Name, "Details", "Club", new { Id = item.HomeClubId }, new { style = "text-decoration:none" })
-            </td>
-            <td>
-                @Html.ActionLink(item.AwayClub.Name, "Details", "Club", new {Id=item.AwayClubId},new { style = "text-decoration:none"})
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeGoals) : @Html.DisplayFor(modelItem => item.AwayGoals)
-            </td>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>
+                    Gospodarze
+                </th>
+                <th>
+                    Goście
+                </th>
+                <th>
+                    Wynik
+                </th>
 
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new {id = item.MatchId}) |*@
-                @Html.ActionLink("Szczegóły", "Details", "Match", new{id = item.MatchId}, new {@class="btn btn-info"})
-                    
-</td>
-        </tr>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.HomeClub.Name, "Details", "Club", new {Id = item.HomeClubId}, new {style = "text-decoration:none"})
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.AwayClub.Name, "Details", "Club", new {Id = item.AwayClubId}, new {style = "text-decoration:none"})
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HomeGoals) : @Html.DisplayFor(modelItem => item.AwayGoals)
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new {id = item.MatchId}) |*@
+                        @Html.ActionLink("Szczegóły", "Details", "Match", new {id = item.MatchId}, new {@class = "btn btn-info"})
+
+                    </td>
+                </tr>
+            }
+
+
+        </table>
     }
-
-</table>
+    else
+    {
+        <h4>Brak meczów do wyświetlenia.</h4>
+    }
+}
 
 

@@ -39,6 +39,7 @@ namespace FL.Controllers
         }
 
         // GET: /Player/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "Name");
@@ -46,7 +47,7 @@ namespace FL.Controllers
             return View();
         
         }
-
+        [Authorize]
         public ActionResult CreateByClub(int clubId)
         {
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Name");
@@ -58,6 +59,7 @@ namespace FL.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="PlayerId,Name,PositionId,ClubId")] Player player)
         {
@@ -79,6 +81,7 @@ namespace FL.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult CreateByClub([Bind(Include = "PlayerId,Name,PositionId,ClubId")] Player player)
         {
@@ -100,6 +103,7 @@ namespace FL.Controllers
         }
 
         // GET: /Player/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -120,6 +124,7 @@ namespace FL.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="PlayerId,Name,PositionId,ClubId")] Player player)
         {
@@ -136,6 +141,7 @@ namespace FL.Controllers
         }
 
         // GET: /Player/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -152,6 +158,7 @@ namespace FL.Controllers
 
         // POST: /Player/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

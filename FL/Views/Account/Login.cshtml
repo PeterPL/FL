@@ -1,7 +1,7 @@
 ﻿@model FL.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Logowanie";
+    ViewBag.Title = "Logowanie do konta administratora";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -11,7 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Użyj lokalnego konta do logowania.</h4>
+                
                 <hr />
                 @Html.ValidationSummary(true)
                 <div class="form-group">
@@ -41,9 +41,7 @@
                         <input type="submit" value="Zaloguj" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Zarejestruj się", "Register"), jeżeli nie masz konta.
-                </p>
+                
             }
         </section>
     </div>

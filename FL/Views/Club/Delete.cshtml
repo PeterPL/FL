@@ -1,18 +1,18 @@
 ﻿@model Domain.Entities.Club
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Usuwanie klubu";
 }
 
-<h2>Delete</h2>
+<h2>Usuwanie klubu @Model.Name</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy jesteś pewny, że chcesz usunąć ten klub?</h3>
 <div>
-    <h4>Club</h4>
+   
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.Label("Klub")
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Played)
+            @Html.Label("Rozegrane mecze")
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Points)
+            @Html.Label("Punkty")
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Won)
+            @Html.Label("Zwycięstwa")
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Drawn)
+            @Html.Label("Remisy")
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Lost)
+            @Html.Label("Porażki")
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GoalsFor)
+            @Html.Label("Bramki zdobyte")
         </dt>
 
         <dd>
@@ -68,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GoalsAgainst)
+            @Html.Label("Bramki stracone")
         </dt>
 
         <dd>
@@ -81,8 +81,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Tak" class="btn btn-success" /> 
+            @Html.ActionLink("Nie", "Index", null, new{@class="btn btn-danger"})
         </div>
     }
 </div>

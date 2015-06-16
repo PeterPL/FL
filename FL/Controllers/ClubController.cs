@@ -49,6 +49,7 @@ namespace FL.Controllers
         
 
         // GET: /Club/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -58,6 +59,7 @@ namespace FL.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="ClubId,Name,Played,Points,Won,Drawn,Lost,GoalsFor,GoalsAgainst")] Club club)
         {
@@ -72,6 +74,7 @@ namespace FL.Controllers
         }
 
         // GET: /Club/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +94,7 @@ namespace FL.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include="ClubId,Name,Played,Points,Won,Drawn,Lost,GoalsFor,GoalsAgainst")] Club club)
         {
             if (ModelState.IsValid)
@@ -103,6 +107,7 @@ namespace FL.Controllers
         }
 
         // GET: /Club/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,6 +124,7 @@ namespace FL.Controllers
 
         // POST: /Club/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

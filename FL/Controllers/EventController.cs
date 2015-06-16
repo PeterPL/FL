@@ -46,7 +46,7 @@ namespace FL.Controllers
         //    ViewBag.PlayerId = new SelectList(db.Players, "PlayerId", "FirstName");
         //    return View();
         //}
-
+        [Authorize]
         public ActionResult Create(int matchId)
         {
             Match match = (db.Matches.Where(m => m.MatchId == matchId)).FirstOrDefault();
@@ -70,6 +70,7 @@ namespace FL.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="EventId,Time,matchId,ClubId,PlayerId,EventKindId")] Event @event)
         {
@@ -88,6 +89,7 @@ namespace FL.Controllers
         }
 
         // GET: /Event/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -110,6 +112,7 @@ namespace FL.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="EventId,Time,MatchId,ClubId,PlayerId,EventKindId")] Event @event)
         {
@@ -127,6 +130,7 @@ namespace FL.Controllers
         }
 
         // GET: /Event/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -142,6 +146,7 @@ namespace FL.Controllers
         }
 
         // POST: /Event/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -14,43 +14,53 @@
         </p>
     }
 }
+
+
+@if (Model.Count() != 0)
+{
     <table class="table table-bodered table-striped">
-    <tr>
-        <th>
-            Piłkarz
-        </th>
-        <th>
-            Klub
-        </th>
-        <th>
-            Pozycja
-        </th>
-        
-    </tr>
+        <tr>
+            <th>
+                Piłkarz
+            </th>
+            <th>
+                Klub
+            </th>
+            <th>
+                Pozycja
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Club.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position.Name)
-        </td>
+        </tr>
 
-        <td>
-          
-                @Html.ActionLink("Szczegóły", "Details", new {id = item.PlayerId}, new{@class="btn btn-info"})
-            @{
-    if (User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Usuń", "Delete", new {id = item.PlayerId}, new {@class="btn btn-danger"})
-                }
-            }
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Club.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position.Name)
+                </td>
+
+                <td>
+
+                    @Html.ActionLink("Szczegóły", "Details", new {id = item.PlayerId}, new {@class = "btn btn-info"})
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Usuń", "Delete", new {id = item.PlayerId}, new {@class = "btn btn-danger"})
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
 }
-
-</table>
+else
+{
+    <h4 >Brak zawodników do wyświetlenia.</h4>
+}

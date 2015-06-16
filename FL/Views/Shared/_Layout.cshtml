@@ -59,7 +59,17 @@
                                     <li>@Html.ActionLink("Nowy mecz", "Create", "Match")</li>
                                 }
                             }
-                                </ul>
+                        </ul>
+                    </li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Reset ligi", "ResetLeague", "Home")</li>
+                        }
+                           
+                            }
+                    <li>
+                        
                     </li>
                     
                 </ul>
